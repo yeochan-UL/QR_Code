@@ -1,98 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>쉽고 빠른 QR 코드 생성기 </title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <style>
-    /* 전체 배경과 폰트 설정 */
-    body {
-      font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-      background: linear-gradient(135deg, #94c6f8, #2e3aa3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      color: #fff;
-    }
-    
-    /* 컨테이너 스타일 */
-    .container {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      text-align: center;
-      width: 350px;
-    }
-    
-    /* 제목 스타일 */
-    h1 {
-      margin-bottom: 25px;
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-    
-    /* 입력창 스타일 */
-    input[type="text"] {
-      width: calc(100% - 20px);
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      font-size: 1rem;
-      outline: none;
-    }
-    
-    /* 버튼 기본 스타일 */
-    button {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 6px;
-      background-color: #fff;
-      color: #5563DE;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-bottom: 10px;
-    }
-    
-    button:hover {
-      background-color: #f0f0f0;
-    }
-    
-    /* 다운로드 버튼 활성화 상태 (파란색 계열) */
-    #downloadBtn {
-      background-color: #1976D2;
-      color: #ffffff;
-    }
-    
-    /* 다운로드 버튼 비활성화 상태 (회색) */
-    #downloadBtn:disabled {
-      background-color: #ccc;
-      color: #888;
-      cursor: not-allowed;
-    }
-    
-    /* QR 코드 영역 스타일 */
-    #qrcode {
-      margin-top: 20px;
-      padding: 10px;
-      background: #fff;
-      border-radius: 6px;
-      display: inline-block;
-    }
-
-    /* 카피라이트 영역 스타일 */
-    .footer {
-      margin-top: 20px;
-      font-size: 0.8rem;
-      color: #ccc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>쉽고 빠른 QR 코드 생성기 </title>
+    <link rel="icon" type="image/png" href="assets/img/fotor.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        @import url('assets/css/index.css');
+    </style>
 </head>
     <body>
         <div class="container">
@@ -104,61 +19,6 @@
             <div class="footer">© 찬찬잉</div>
         </div>
         
-        <script>
-            // 초기 QR 코드 생성 (기본 크기 지정)
-            var qrcode = new QRCode(document.getElementById("qrcode"), {
-            width: 128,
-            height: 128
-            });
-            
-            // QR 코드 재생성을 위한 함수
-            function generateQRCode(url) {
-            // 기존 QR 코드 제거 후 새로 생성
-            document.getElementById("qrcode").innerHTML = "";
-            new QRCode(document.getElementById("qrcode"), {
-                text: url,
-                width: 128,
-                height: 128,
-            });
-            }
-            
-            // "생성" 버튼 클릭 시 이벤트 핸들러
-            document.getElementById("generateBtn").addEventListener("click", function() {
-            var url = document.getElementById("urlInput").value;
-            if(url) {
-                generateQRCode(url);
-                // QR 코드가 생성되었으므로 다운로드 버튼 활성화
-                document.getElementById("downloadBtn").disabled = false;
-            } else {
-                alert("주소를 입력하세요.");
-            }
-            });
-            
-            // "이미지 다운로드" 버튼 클릭 시 이벤트 핸들러
-            document.getElementById("downloadBtn").addEventListener("click", function() {
-            // QR 코드 영역 내 canvas 또는 img 요소를 확인
-            var canvas = document.querySelector("#qrcode canvas");
-            var dataUrl;
-            if (canvas) {
-                dataUrl = canvas.toDataURL("image/png");
-            } else {
-                var img = document.querySelector("#qrcode img");
-                if (img) {
-                dataUrl = img.src;
-                }
-            }
-            
-            if (dataUrl) {
-                var link = document.createElement("a");
-                link.href = dataUrl;
-                link.download = "qrcode.png";
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            } else {
-                alert("QR 코드가 생성되지 않았습니다.");
-            }
-            });
-        </script>
+        <script src="index.js"></script>
     </body>
 </html>
